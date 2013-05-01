@@ -1,0 +1,39 @@
+﻿@model KakPishetsya.Common.Data.Models.Rule
+
+@{
+    ViewBag.Title = "Изменение правила";
+    ViewBag.PageName = "Изменение правила";
+}
+
+<div class="header">
+    <h1>@ViewBag.PageName</h1>
+</div>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Администрирование", "Index", "Administration") <span class="divider">/</span> </li>
+    <li>@Html.ActionLink("Правила", "Index", "Rules") <span class="divider">/</span> </li>
+    <li class="active">@ViewBag.PageName</li>
+</ul>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Правило</legend>
+
+        @Html.Partial("_CreateOrEdit", Model)
+
+        @Html.HiddenFor(model => model.Id)
+
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Обратно к списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

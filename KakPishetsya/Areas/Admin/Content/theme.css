@@ -1,0 +1,193 @@
+﻿body
+{
+    font-family: "Trebuchet MS" , Verdana, Helvetica, Sans-Serif;
+    font-size: 13px;
+    color: #232323;
+    background-color: White;
+}
+
+header, footer, nav, section
+{
+    display: block;
+}
+
+h2
+{
+    text-align: center;
+}
+
+a
+{
+    text-decoration: none;
+    border-bottom: solid 1px #6678b1;
+    color: #6678b1;
+}
+
+a:visited
+{
+    text-decoration: none;
+    border-bottom: solid 1px #003399;
+    color: #003399;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+
+fieldset
+{
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend
+{
+    font-size: 14px;
+    font-weight: bold;
+    padding: 0 5px 0 5px;
+}
+
+textarea
+{
+    min-height: 75px;
+}
+
+.editor-label
+{
+    margin: 1em 0 0 0;
+}
+
+.editor-field
+{
+    margin: 0.5em 0 0 0;
+}
+
+.display-label
+{
+    font-weight: bold;
+    background-color: #eee;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error
+{
+    color: #ff0000;
+}
+
+.field-validation-valid
+{
+    display: none;
+}
+
+.input-validation-error
+{
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors
+{
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid
+{
+    display: none;
+}
+
+/* Styles for tables
+-----------------------------------------------------------*/
+table
+{
+    font-size: 13px;
+    background: White;
+    margin: 10px 0 10px 0;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+table th
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: Black;
+    padding: 5px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+table td
+{
+    border-bottom: 1px solid #ccc;
+    color: #444;
+    padding: 6px 8px;
+}
+
+table td a
+{
+    text-decoration: none;
+    border-bottom: solid 1px #6678b1;
+    color: #6678b1;
+}
+
+table tbody tr:hover td
+{
+    color: #000;
+    background-color: #f5f5f5;
+}
+
+/* Styles for menu
+-----------------------------------------------------------*/
+div.menu
+{
+    width: 100%;
+    padding: 5px 0 5px 5px;
+    margin: 0;
+    border-bottom: 1px solid #6678b1;
+}
+
+div.menu a,
+div.menu a:visited
+{
+    text-decoration: none;
+    color: Black;
+    font-weight: bold;
+    border: 0;
+}
+
+div.menu a:hover
+{
+    color: #5567a0;
+}
+
+ul.breadcrumb {
+    list-style-type: none;
+}
+
+ul.breadcrumb li { display: inline; }
+
+#loginForm {
+    margin: 0 auto;
+    width: 20%;
+}
+
+#loginForm fieldset ol {
+    list-style-type: none;
+}
+
+#loginForm fieldset li label {
+    width: 200px;
+}
+
+#loginForm fieldset input[type="submit"] {
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+}
+
+.login-title {
+    text-align: center;
+    margin: 0 auto;
+    width: 25%;
+}

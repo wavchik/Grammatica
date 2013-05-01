@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/Admin/css")
+</head>
+    <body>
+        <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+        @RenderSection("scripts", required: false)
+        <div>
+            @RenderBody()
+        </div>
+        <div>
+            @if (User.Identity.IsAuthenticated) {
+                 @Html.ActionLink("Выйти", "LogOff", "Administration")
+            }
+        </div>
+    </body>
+</html>

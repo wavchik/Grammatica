@@ -1,0 +1,74 @@
+﻿@model IEnumerable<KakPishetsya.Common.Data.Models.Word>
+@{
+    ViewBag.Title = "Слова";
+    ViewBag.PageName = "Слова";
+}
+@using PagedList;
+@using PagedList.Mvc;
+
+<div class="header">
+    <h1>@ViewBag.PageName</h1>
+</div>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Администрирование", "Index", "Administration") <span class="divider">/</span> </li>
+    <li class="active">@ViewBag.PageName</li>
+</ul>
+
+<p>
+    @Html.ActionLink("Создать", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SmartName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.H1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Keywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rule)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (KakPishetsya.Common.Data.Models.Word item in ViewBag.OnePageOfWords)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SmartName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.H1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Keywords)
+            </td>
+            <td>
+                @Html.CheckBox("Rule", ((KakPishetsya.Common.Data.Models.Word)item).Rule != null, new { disabled = "disabled " })
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.Id }) |
+                @Ajax.ActionLink("Удалить", "Delete", new { id = item.Id }, new AjaxOptions { HttpMethod = "POST" }, new { onclick = "return confirm('Вы действительно хотите удалить данное слово?')"})
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfWords, page => Url.Action("Index", new { page }))

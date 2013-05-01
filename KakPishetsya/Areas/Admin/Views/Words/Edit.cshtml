@@ -1,0 +1,38 @@
+﻿@model KakPishetsya.Common.Data.Models.Word
+
+@{
+    ViewBag.Title = "Изменение слова/фразы";
+    ViewBag.PageName = "Изменение слова/фразы";
+}
+
+<div class="header">
+    <h1>@ViewBag.PageName</h1>
+</div>
+<ul class="breadcrumb">
+    <li>@Html.ActionLink("Администрирование", "Index", "Administration") <span class="divider">/</span> </li>
+    <li>@Html.ActionLink("Слова", "Index", "Words") <span class="divider">/</span> </li>
+    <li class="active">@ViewBag.PageName</li>
+</ul>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Слово/Фраза</legend>
+
+        @Html.HiddenFor(model => model.Id)
+        @Html.Partial("_CreateOrEdit", Model)
+
+        <p>
+            <input type="submit" value="Сохранить" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Обратно к списку", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

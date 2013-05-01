@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakPishetsya", "KakPishetsya\KakPishetsya.csproj", "{CC830FC0-5D01-42C9-A2BE-A57E6241B2B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakPishetsya.Common.Data", "KakPishetsya.Common.Data\KakPishetsya.Common.Data.csproj", "{BD590F06-FC0B-4C4C-AB3C-ADE855A942D9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{28C8693E-8555-456D-BBC2-862AD42B7435}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\Nuget.config = .nuget\Nuget.config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakPishetsya.DAL", "KakPishetsya.DAL\KakPishetsya.DAL.csproj", "{DCCD122C-364C-4C4D-8EC0-15A73D740FB0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KakPishetsya.Common.Web", "KakPishetsya.Common.Web\KakPishetsya.Common.Web.csproj", "{F2A3E8A6-51ED-4321-9160-C95713D4473A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC830FC0-5D01-42C9-A2BE-A57E6241B2B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC830FC0-5D01-42C9-A2BE-A57E6241B2B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC830FC0-5D01-42C9-A2BE-A57E6241B2B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC830FC0-5D01-42C9-A2BE-A57E6241B2B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD590F06-FC0B-4C4C-AB3C-ADE855A942D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD590F06-FC0B-4C4C-AB3C-ADE855A942D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD590F06-FC0B-4C4C-AB3C-ADE855A942D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD590F06-FC0B-4C4C-AB3C-ADE855A942D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCCD122C-364C-4C4D-8EC0-15A73D740FB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCCD122C-364C-4C4D-8EC0-15A73D740FB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCCD122C-364C-4C4D-8EC0-15A73D740FB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCCD122C-364C-4C4D-8EC0-15A73D740FB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2A3E8A6-51ED-4321-9160-C95713D4473A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2A3E8A6-51ED-4321-9160-C95713D4473A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2A3E8A6-51ED-4321-9160-C95713D4473A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2A3E8A6-51ED-4321-9160-C95713D4473A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
