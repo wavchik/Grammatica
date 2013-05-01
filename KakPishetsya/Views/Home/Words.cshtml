@@ -1,0 +1,32 @@
+﻿@model IEnumerable<KakPishetsya.Common.Data.Models.Word>
+
+@{
+    ViewBag.Title = "Слова";
+    ViewBag.ShowMainLink = true;
+}
+@using PagedList;
+@using PagedList.Mvc;
+
+<h2>Слова</h2>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfWords, page => Url.Action("Words", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+@foreach (KakPishetsya.Common.Data.Models.Word item in ViewBag.OnePageOfWords)
+{
+    <div>
+        <div style="float:left;width:20%;">
+            @*linkText, actionName, controllerName, routeValues, htmlAttributes*@
+            @Html.ActionLink(item.Name, "Index", "Word", new { smartname = item.SmartName }, null)
+        </div>
+        <div style="float:left;width:80%"> @Html.Raw(item.Explanation)</div>
+        <div style="clear:both;">&nbsp;</div>
+    </div>
+}
+
+
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfWords, page => Url.Action("Words", new { page }), PagedListRenderOptions.ClassicPlusFirstAndLast)
+
+@section styles{
+     @Styles.Render("~/Content/PagedList.css")
+}

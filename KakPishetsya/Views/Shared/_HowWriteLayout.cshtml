@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (IsSectionDefined("topic_word"))
+{
+    <section id="topic-word">
+        @RenderSection("topic_word", required: false)
+    </section>
+}
+            
+<section id="main-topic">
+    @RenderBody()
+</section>

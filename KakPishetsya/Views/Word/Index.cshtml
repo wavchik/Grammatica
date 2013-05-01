@@ -1,0 +1,29 @@
+﻿@model KakPishetsya.Common.Data.Models.Word
+
+@{
+    Layout = "~/Views/Shared/_HowWriteLayout.cshtml";
+    ViewBag.Title = Model.Title ?? Model.Name;
+    ViewBag.Description = Model.Description;
+    ViewBag.Keywords = Model.Keywords;
+    ViewBag.H1Title = Model.H1 ?? Model.Name;
+    ViewBag.ShowMainLink = true;
+}
+
+@section topic_word {
+    @Model.Name
+}
+
+@*<b>@Html.DisplayFor(model => model.Name)</b><br />*@
+<span>@Html.Raw(Model.Explanation)</span>
+
+@*@if (!string.IsNullOrEmpty((Model.SpellingExample))) {
+<span class="example">
+    <i>Например:</i> @Html.Raw(Model.SpellingExample)
+</span>
+}*@
+
+@if (Model.Rule != null) {
+<div class="rule">
+    @Html.Raw(Model.Rule.Description)
+</div>
+}

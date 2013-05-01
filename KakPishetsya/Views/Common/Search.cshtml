@@ -1,0 +1,78 @@
+﻿@{
+    var searchUrl = VirtualPathUtility.ToAbsolute("~/Search/");
+    var useMargin = Request.Url.AbsolutePath == "/";
+}
+
+<section id="search-block" @(useMargin ? "style=margin-top:225px;" : string.Empty)>
+    <div class="common-search-block">
+        <label>Введите слово для поиска</label>
+        <input type="text" id="tbSearch" />
+        <img src="@Url.Content("~/Images/search-btn-2.png")" alt="Поиск" id="bSearch" />
+    </div>
+</section>
+
+<script type="text/javascript" language="javascript">
+    var jq = jQuery;
+
+    jq(document).ready(function () {
+        var baseUrl = '/';
+        // http://jqueryui.com/autocomplete/#remote-jsonp
+        jq('#tbSearch').autocomplete({
+            source: function (request, response) {
+                jq.getJSON(
+                    '@(VirtualPathUtility.ToAbsolute("~/Words/Find/"))' + jq('#tbSearch').val(),
+                    null,
+                    function (result) {
+
+                        response(jq.map(result.words, function (item) {
+                            return {
+                                label: item.Name,
+                                value: item.Name,
+                                url: item.SmartName
+                            };
+                        }));
+                    }
+                );
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                jq('#tbSearch').val(ui.item.label);
+                window.location = baseUrl + ui.item.url;
+            },
+            open: function () {
+                jq(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+            },
+            close: function () {
+                jq(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            }
+        });
+
+        function doForcedSearch() {
+            jq('#tbSearch').autocomplete("option", { minLength: 1 });
+            jq('#tbSearch').autocomplete("search", jq('#tbSearch').val());
+            jq('#tbSearch').autocomplete("option", { minLength: 2 });
+        }
+
+        jq("#tbSearch").keydown(function (event) {
+            if (event.which == 13) {
+                doForcedSearch();
+            }
+        });
+
+        jq('#bSearch').click(function (e) {
+            var searchVal = jq('#tbSearch').val();
+            if (searchVal.length < 1) {
+                window.location = '/';
+            } else {
+                window.location = '@searchUrl' + jq('#tbSearch').val();
+            }
+        });
+    });
+</script>
+
+<style>
+    .ui-autocomplete-loading {
+    background: white url('/content/themes/base/images/ajax-loader.gif') right center no-repeat;
+    }
+</style>
+

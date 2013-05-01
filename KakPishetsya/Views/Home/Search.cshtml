@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Поиск";
+    var searchResults = (IPagedList) ViewBag.OnePageOfWords;
+    var searchName = (string)ViewData["SearchName"] ?? string.Empty;
+    ViewBag.ShowMainLink = true;
+}
+@using PagedList;
+@using PagedList.Mvc;
+
+<h2>Поиск</h2>
+
+@if (searchResults.TotalItemCount > 0)
+{
+    if (searchResults.PageCount > 1)
+    {
+        @Html.PagedListPager(searchResults, page => Url.Action("Search", new {page}), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    }
+
+    int i = 0;
+    foreach (KakPishetsya.Common.Data.Models.Word item in ViewBag.OnePageOfWords)
+    {
+        <div style="font-size: 18px;">
+            <div style="float:left;width:20%;">
+                @Html.ActionLink(item.Name, "Index", "Word", new { smartname = item.SmartName }, null)
+            </div>
+            <div style="float:left;width:80%"> @Html.Raw(item.Explanation)</div>
+            <div style="clear:both;">&nbsp;</div>
+        </div>
+        
+        if (ViewBag.OnePageOfWords.Count - 1 > i++)
+         {
+             <div style="clear:both;border: 1px solid black;height: 2px;">&nbsp;</div>
+         }
+    }
+
+
+    if (searchResults.PageCount > 1)
+    {
+        @Html.PagedListPager(searchResults, page => Url.Action("Search", new {page}), PagedListRenderOptions.ClassicPlusFirstAndLast)
+    }
+} else {
+   <div style="width: 600px;text-align: left;">
+        <p style="padding-top:.33em"> По запросу <em>@searchName</em> ничего не найдено.&nbsp;  </p>
+    
+        <p style="margin-top:1em">Рекомендации:</p>
+    
+        <ul style="margin:0 0 2em;margin-left:1.3em"><li>Убедитесь, что все слова написаны без ошибок.</li><li>Попробуйте использовать другие ключевые слова.</li><li>Попробуйте использовать более популярные ключевые слова.</li><li>Попробуйте уменьшить количество слов в запросе.</li></ul>
+   </div>
+}
+
+@if (!string.IsNullOrEmpty(searchName))
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#tbSearch').val('@searchName');
+        });
+    </script>
+}
+
+@section styles{
+     @Styles.Render("~/Content/PagedList.css")
+}

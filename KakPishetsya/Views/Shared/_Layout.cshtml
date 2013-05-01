@@ -1,0 +1,157 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta property="og:title" content="Как пишется?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://kakpishetsya.ru/" />
+        <meta property="og:image" content="http://ia.media-imdb.com/images/rock.jpg" />
+        <meta property="og:description" content="Лучший сервис для быстрой и удобной проверки правописания." />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        @if (string.IsNullOrEmpty(ViewBag.Title)) {
+            <title>Как пишется?</title>
+        } else {
+            <title>Как пишется? - "@ViewBag.Title"</title>
+        }
+
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+
+        @if (!string.IsNullOrEmpty(ViewBag.Description))
+        {
+            <meta name="description" content="@ViewBag.Description" />
+        }
+    
+        @if (!string.IsNullOrEmpty(ViewBag.Keywords))
+        {
+            <meta name="Keywords" content="@ViewBag.Keywords" />
+        }
+    
+        @Styles.Render("~/Content/howto")
+        @Styles.Render("~/Content/AutoComplete")
+        @RenderSection("styles", required: false)
+        
+        <script type="text/javascript"> var switchTo5x = true;</script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript"> stLight.options({ publisher: "b9b92bf4-1601-4121-a010-3530ace693b8", doNotHash: false, doNotCopy: false, hashAddressBar: false });</script>
+        
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @Scripts.Render("~/bundles/jqueryval")
+    </head>
+    <body>
+        <div style="width: 100%; text-align: center;">
+            <div style="display: inline-block; width: 950px;">
+                <section id="topic-header">
+                    <header>
+                        <h1>
+                            @if (ViewBag.ShowMainLink == true)
+                            {
+                                <a href='@VirtualPathUtility.ToAbsolute("~/")' class="main-link">
+                                    Kак пишется?
+                                </a>
+                            }
+                            else
+                            {
+                                @Html.Encode("Kак пишется?")
+                            }
+                            <div class="dek">Мы подскажем правильный ответ</div>
+                        </h1>
+                    </header>
+                </section>
+            
+                <img class="offer-word-img" id="openPopup" src="@Url.Content("~/Images/offer-word-button.png")" alt="Предложить слово"/>
+                
+                @Html.Action("Search", "Common")
+            
+                @RenderBody()
+                
+                <br />
+            
+                <span class='st_facebook_large' displayText='Facebook'></span>
+                <span class='st_twitter_large' displayText='Tweet'></span>
+                <span class='st_vkontakte_large' displayText='Vkontakte'></span>
+                <span class='st_googleplus_large' displayText='Google +'></span>
+                <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                <span class='st_email_large' displayText='Email'></span>
+            
+            </div>
+        </div>
+        
+        @RenderSection("scripts", required: false)
+        @{Html.RenderPartial("_OfferWord");}
+        
+        @*@{Html.RenderPartial("_Feedback");}*@
+        
+        <script type='text/javascript'>
+
+var _ues = {
+host:'kakpishetsya.userecho.com',
+forum:'19004',
+lang:'ru',
+tab_corner_radius:5,
+tab_font_size:20,
+tab_image_hash:'0L7RgdGC0LDQstC40YLRjCDQvtGC0LfRi9Cy',
+tab_chat_hash:'0YfQsNGC',
+tab_alignment:'left',
+tab_text_color:'#FFFFFF',
+tab_text_shadow_color:'#00000055',
+tab_bg_color:'#57A957',
+tab_hover_color:'#F45C5C'
+};
+
+(function() {
+    var _ue = document.createElement('script'); _ue.type = 'text/javascript'; _ue.async = true;
+    _ue.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.userecho.com/js/widget-1.4.gz.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(_ue, s);
+  })();
+
+</script>
+               
+        <!-- Google.Metrika counter -->
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-39473517-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function () {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+        <!-- Google.Metrika counter -->
+
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function () {
+                    try {
+                        w.yaCounter20667095 = new Ya.Metrika({ id: 20667095,
+                            webvisor: true,
+                            clickmap: true,
+                            trackLinks: true,
+                            accurateTrackBounce: true
+                        });
+                    } catch (e) { }
+                });
+
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="//mc.yandex.ru/watch/20667095" style="position:absolute; left:-9999px;" alt="" /></div></
+        noscript>
+        <!-- /Yandex.Metrika counter -->
+        
+    </body>
+</html>

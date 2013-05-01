@@ -1,0 +1,79 @@
+﻿<div id="popupHover" class="popupHover">
+</div>
+<div class="popup" id="offer-word-popup">
+    <img src="../../Images/close-button.png" alt="Закрыть"/>
+    <span>Введите слово, которого нехватает у нас на сайте:</span>
+    <span class="error">Введите слово</span>
+    <input type="text" class="u1" id="newWord" />
+    <div class="buttons">
+        <input type="button" value="Предложить" id="offer-word-button"/>
+        <input type="button" value="Закрыть" id="offer-word-close"/>
+    </div>
+</div>
+<div class="popupThanks" id="offer-word-thanks">
+    <h1>
+        Спасибо:)</h1>
+</div>
+@{
+    var baseUrl = System.Web.VirtualPathUtility.ToAbsolute("~/OfferWord/");
+}
+<script type="text/javascript" language="javascript">
+    function processOfferWord() {
+        var offeredWordValue = $('#newWord').val();
+        if (offeredWordValue.length == 0) {
+            $('#offer-word-popup span.error').show();
+            return;
+        }
+
+        $('#offer-word-popup span.error').hide();
+        $.post(
+            '@baseUrl',
+            { word: offeredWordValue },
+            function(result) {
+                $("#offer-word-popup").hide();
+                $("#offer-word-thanks").show();
+                setTimeout(function() {
+                    $("#offer-word-thanks").hide();
+                    $("#popupHover").hide();
+                    $('#newWord').val('');
+                }, 1500);
+            }
+        ).fail(function() { alert('error during offer word'); });
+    }
+
+    $(document).ready(function () {
+        $('#offer-word-popup span.error').hide();
+
+        $('#newWord').keyup(function () {
+            if ($(this).val().length > 0) {
+                $('#offer-word-popup span.error').hide();
+                return;
+            }
+
+            $('#offer-word-popup span.error').show();
+        });
+
+        $("#openPopup").click(function () {
+            $("#popupHover").show();
+            $("#offer-word-popup").show();
+        });
+
+        $("#offer-word-popup img")
+            .add("#offer-word-popup #offer-word-close")
+            .click(function () {
+                $("#popupHover").hide();
+                $("#offer-word-popup").hide();
+                $('#newWord').val('');
+            });
+
+        $("#newWord").keydown(function (event) {
+            if (event.which == 13) {
+                processOfferWord();
+            }
+        });
+
+        $("#offer-word-popup #offer-word-button").click(function (e) {
+            processOfferWord();
+        });
+    });
+</script>

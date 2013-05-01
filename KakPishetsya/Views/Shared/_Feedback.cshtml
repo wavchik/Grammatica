@@ -1,0 +1,145 @@
+﻿<div class="feedback-button">
+    <img src='@VirtualPathUtility.ToAbsolute("~/Images/vertical-feedback.png")' alt="Оставить отзыв" />
+</div>
+
+<style type="text/css">
+    #feedback-dialog {font-size: 62.5%;}
+    #feedback-dialog label, #feedback-dialog input { display:block; }
+	#feedback-dialog input.text { margin-bottom:12px; width:95%; padding: .4em; }
+	#feedback-dialog fieldset { padding:0; border:0; margin-top:25px; }
+	#feedback-dialog label.error { color: Red;font-style: italic;padding: 1px;margin: -10px 0px 10px 5px; }
+</style>
+
+<div id="feedback-dialog" title="Оставить отзыв">
+    <p class="validateTips">Заполните пожалуйста все поля.</p>
+ 
+    <form id="fform">
+        <fieldset>
+            <label for="fname">Имя</label>
+            <input type="text" name="fname" id="fname" class="text ui-widget-content ui-corner-all" width="430" />
+            <label for="femail">Электронная почта</label>
+            <input type="text" name="femail" id="femail" value="" class="text ui-widget-content ui-corner-all" width="430" />
+            <label for="ftext">Отзыв/Предложение</label>
+            <textarea id="ftext" name="ftext" rows="10" cols="70" style="width: 435px;height: 130px;"></textarea>
+        </fieldset>
+    </form>
+</div>
+
+<div id="feedback-thanks" title="Спасибо за Ваш отзыв">
+    <h3>Ваш отзыв обязательно будет учтен. Спасибо.</h3>
+</div>
+        
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $('#fform').validate({
+            rules: {
+                fname: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 25
+                },
+
+                femail: {
+                    required: true,
+                    email: true
+                },
+
+                ftext: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 1000
+                }
+            },
+            messages: {
+                fname: {
+                    required: "Введите имя",
+                    minlength: "Имя должно содержать не менее 4 символов",
+                    maxlength: "Имя должно содержать не более 25 символов"
+                },
+
+                femail: {
+                    required: "Введите электронную почту",
+                    email: "Электронная почта введена неверно"
+                },
+
+                ftext: {
+                    required: "Введите текст отзыва",
+                    minlength: "Отзыв должен содержать не менее 8 символов",
+                    maxlength: "Отзыв должен содержать не более 1000 символов"
+                }
+            },
+            invalidHandler: function (form, validator) {
+                var errors = validator.numberOfInvalids();
+                $("#feedback-dialog").dialog("option", { height: 450 + errors * 20 });
+            },
+            showErrors: function (errorMap, errorList) {
+                this.defaultShowErrors();
+
+                var errors = this.numberOfInvalids();
+
+                $("#feedback-dialog").dialog("option", { height: 450 + errors * 20 });
+
+                $('.error[for="ftext"]').css("margin", "-2px 0 0 0");
+            }
+        });
+
+        function processFeedack(dialogForm) {
+            var fname = $('#fform #fname'), femail = $('#fform #femail'), ftext = $('#fform #ftext');
+            $.post(
+                '@VirtualPathUtility.ToAbsolute("~/Feedback/Create")',
+                {
+                    Name: fname.val(),
+                    Email: femail.val(),
+                    Text: ftext.val()
+                },
+                function (data) {
+                    if (data.response) {
+                        $(dialogForm).dialog("close");
+                        $("#feedback-thanks").dialog("open");
+                    }
+                }
+            );
+        }
+
+        $("#feedback-dialog").dialog({
+            autoOpen: false,
+            height: 450,
+            width: 480,
+            modal: true,
+            resizable: false,
+            buttons: {
+                "Отправить": function () {
+                    $('#fform').validate();
+                    if ($('#fform').valid()) {
+                        processFeedack(this);
+                    }
+                },
+                "Отмена": function () {
+                    $(this).dialog("close");
+                }
+            },
+            close: function (event, ui) {
+                var fname = $('#fform #fname'), femail = $('#fform #femail'), ftext = $('#fform #ftext');
+                fname.val('');
+                femail.val('');
+                ftext.val('');
+                $('#fform').validate().resetForm();
+                $("#feedback-dialog").dialog("option", { height: 450});
+            }
+        });
+
+        $("#feedback-thanks").dialog({
+            modal: true,
+            autoOpen: false,
+            buttons: {
+                Ok: function () {
+                    $(this).dialog("close");
+                }
+            }
+        });
+
+        $('div.feedback-button img').click(function () {
+            $("#feedback-dialog").dialog("open");
+        });
+    });
+</script>
